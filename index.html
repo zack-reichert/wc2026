@@ -295,8 +295,52 @@ td.pts{
 .adv-line span{display:flex;align-items:center;gap:4px}
 
 /* ══════════════════════════════════════
-   SCHEDULE
+   GROUPS
 ══════════════════════════════════════ */
+.groups-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+@media(max-width:500px){.groups-grid{grid-template-columns:1fr}}
+.group-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;position:relative;
+}
+.group-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--gc-color,var(--wc-gold));
+}
+.gc-header{
+  padding:10px 14px 8px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.gc-title{
+  font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;
+  color:var(--text);display:flex;align-items:center;gap:8px;
+}
+.gc-dot{width:8px;height:8px;border-radius:50%;background:var(--gc-color)}
+.gc-opener{font-size:10px;color:var(--text3);letter-spacing:0.3px}
+.gc-teams{padding:4px 0}
+.gc-team{
+  display:flex;align-items:center;gap:10px;
+  padding:7px 14px;border-bottom:1px solid var(--border);
+  transition:background 0.1s;
+}
+.gc-team:last-child{border-bottom:none}
+.gc-team:hover{background:var(--surface2)}
+.gc-flag{font-size:18px;flex-shrink:0;width:26px;text-align:center}
+.gc-name{
+  font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;
+  letter-spacing:0.2px;color:var(--text);flex:1;
+}
+.gc-conf{
+  font-size:10px;color:var(--text3);letter-spacing:0.3px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;
+}
+.gc-host{
+  font-size:9px;font-weight:700;padding:1px 5px;border-radius:2px;
+  font-family:'Barlow Condensed',sans-serif;letter-spacing:0.5px;
+  background:rgba(200,168,75,0.15);color:var(--wc-gold);border:1px solid rgba(200,168,75,0.2);
+}
+
+
 .sch-controls{padding:16px 0;display:flex;flex-direction:column;gap:10px}
 .day-scroll{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .day-scroll::-webkit-scrollbar{display:none}
@@ -389,7 +433,80 @@ footer{
   display:block;margin-bottom:6px;
 }
 
-@media(max-width:580px){
+/* ══════════════════════════════════════
+   KNOCKOUT BRACKET
+══════════════════════════════════════ */
+.ko-stage-label{
+  font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;
+  color:var(--text3);text-transform:uppercase;margin:28px 0 10px;
+  display:flex;align-items:center;gap:10px;
+}
+.ko-stage-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.ko-grid{display:grid;gap:8px}
+.ko-grid.r32{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.ko-grid.r16{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.ko-grid.qf{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.ko-grid.sf{grid-template-columns:repeat(2,1fr)}
+.ko-grid.final{grid-template-columns:1fr;max-width:400px}
+.ko-grid.third{grid-template-columns:1fr;max-width:400px}
+.ko-match{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;position:relative;
+  transition:border-color 0.15s;
+}
+.ko-match:hover{border-color:var(--border2)}
+.ko-match::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--km-color,var(--border));
+}
+.ko-match.final-match{border-color:rgba(200,168,75,0.3)}
+.ko-match.final-match::before{
+  background:linear-gradient(90deg,#E4003A,#FF6B00,#F0D060,#00843D,#003087,#6A1B9A);
+}
+.km-header{
+  padding:6px 12px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.km-round{
+  font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;
+  letter-spacing:0.8px;color:var(--text3);text-transform:uppercase;
+}
+.km-date{font-size:10px;color:var(--text3)}
+.km-teams{padding:2px 0}
+.km-team{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:7px 12px;border-bottom:1px solid var(--border);
+}
+.km-team:last-child{border-bottom:none}
+.km-name{
+  font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;
+  letter-spacing:0.2px;color:var(--text2);display:flex;align-items:center;gap:8px;
+}
+.km-name.tbd{color:var(--text3);font-weight:400;font-style:italic}
+.km-name.known{color:var(--text)}
+.km-flag{font-size:16px}
+.km-score{
+  font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;
+  color:var(--text3);
+}
+.km-score.winner{color:var(--wc-gold2)}
+.ko-tbd-note{
+  text-align:center;padding:48px 20px;color:var(--text3);
+  font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:0.3px;
+  line-height:1.8;
+}
+.ko-tbd-note strong{
+  display:block;font-family:'Bebas Neue',sans-serif;font-size:28px;
+  letter-spacing:2px;color:var(--text2);margin-bottom:8px;
+}
+.ko-countdown{
+  display:inline-block;margin-top:16px;
+  font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;
+  background:linear-gradient(135deg,#E4003A,#FF6B00,#F0D060);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+
+
   .wc26-title{font-size:42px}
   .hero-bg-26{font-size:160px}
   .tab-btn{padding:12px 12px;font-size:11px}
@@ -462,8 +579,10 @@ footer{
     <button class="tab-btn active" data-tab="scores">
       <span class="live-dot" id="liveDot"></span> ⚽ Live Scores
     </button>
+    <button class="tab-btn" data-tab="groups">🗂 Groups</button>
     <button class="tab-btn" data-tab="standings">📊 Standings</button>
     <button class="tab-btn" data-tab="schedule">📅 Schedule</button>
+    <button class="tab-btn" data-tab="knockout">🏆 Knockout</button>
   </nav>
 
   <!-- LIVE SCORES -->
@@ -476,6 +595,14 @@ footer{
     <div class="scores-grid" id="scoresGrid">
       <div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text3)">Loading scores…</div>
     </div>
+  </div>
+
+  <!-- GROUPS -->
+  <div class="panel" id="panel-groups">
+    <div class="section-hd">
+      <h2>Group Stage — All 48 Teams</h2>
+    </div>
+    <div class="groups-grid" id="groupsGrid"></div>
   </div>
 
   <!-- STANDINGS -->
@@ -498,6 +625,16 @@ footer{
     </div>
     <div id="matchList"></div>
   </div>
+
+  <!-- KNOCKOUT -->
+  <div class="panel" id="panel-knockout">
+    <div class="section-hd">
+      <h2>Knockout Stage</h2>
+      <span style="font-size:12px;color:var(--text3);font-family:'Barlow Condensed',sans-serif;letter-spacing:0.3px">Begins July 4 · Slots fill as group stage concludes Jun 27</span>
+    </div>
+    <div id="knockoutBracket"></div>
+  </div>
+
 </div>
 
 <footer>
@@ -608,7 +745,114 @@ const MATCHES = [
   {date:'Jun 27',day:'Saturday, June 27',g:'J',t1:'Algeria',t2:'Austria',venue:'Kansas City',time:'10:00 PM',tv:'FS1'},
 ];
 
-async function apiFetch(path){
+// ── STATIC GROUP DATA — all 48 teams ────────────────────────────────────────
+const GROUP_TEAMS = {
+  A:[
+    {name:'Mexico',flag:'🇲🇽',conf:'CONCACAF',host:true},
+    {name:'South Korea',flag:'🇰🇷',conf:'AFC'},
+    {name:'Czechia',flag:'🇨🇿',conf:'UEFA'},
+    {name:'South Africa',flag:'🇿🇦',conf:'CAF'},
+  ],
+  B:[
+    {name:'Canada',flag:'🇨🇦',conf:'CONCACAF',host:true},
+    {name:'Switzerland',flag:'🇨🇭',conf:'UEFA'},
+    {name:'Qatar',flag:'🇶🇦',conf:'AFC'},
+    {name:'Bosnia & Herzegovina',flag:'🇧🇦',conf:'UEFA'},
+  ],
+  C:[
+    {name:'Brazil',flag:'🇧🇷',conf:'CONMEBOL'},
+    {name:'Morocco',flag:'🇲🇦',conf:'CAF'},
+    {name:'Scotland',flag:'🏴󠁧󠁢󠁳󠁣󠁴󠁿',conf:'UEFA'},
+    {name:'Haiti',flag:'🇭🇹',conf:'CONCACAF'},
+  ],
+  D:[
+    {name:'USA',flag:'🇺🇸',conf:'CONCACAF',host:true},
+    {name:'Türkiye',flag:'🇹🇷',conf:'UEFA'},
+    {name:'Australia',flag:'🇦🇺',conf:'AFC'},
+    {name:'Paraguay',flag:'🇵🇾',conf:'CONMEBOL'},
+  ],
+  E:[
+    {name:'Germany',flag:'🇩🇪',conf:'UEFA'},
+    {name:'Ivory Coast',flag:'🇨🇮',conf:'CAF'},
+    {name:'Ecuador',flag:'🇪🇨',conf:'CONMEBOL'},
+    {name:'Curaçao',flag:'🇨🇼',conf:'CONCACAF'},
+  ],
+  F:[
+    {name:'Netherlands',flag:'🇳🇱',conf:'UEFA'},
+    {name:'Japan',flag:'🇯🇵',conf:'AFC'},
+    {name:'Sweden',flag:'🇸🇪',conf:'UEFA'},
+    {name:'Tunisia',flag:'🇹🇳',conf:'CAF'},
+  ],
+  G:[
+    {name:'Belgium',flag:'🇧🇪',conf:'UEFA'},
+    {name:'Iran',flag:'🇮🇷',conf:'AFC'},
+    {name:'Egypt',flag:'🇪🇬',conf:'CAF'},
+    {name:'New Zealand',flag:'🇳🇿',conf:'OFC'},
+  ],
+  H:[
+    {name:'Spain',flag:'🇪🇸',conf:'UEFA'},
+    {name:'Uruguay',flag:'🇺🇾',conf:'CONMEBOL'},
+    {name:'Saudi Arabia',flag:'🇸🇦',conf:'AFC'},
+    {name:'Cape Verde',flag:'🇨🇻',conf:'CAF'},
+  ],
+  I:[
+    {name:'France',flag:'🇫🇷',conf:'UEFA'},
+    {name:'Senegal',flag:'🇸🇳',conf:'CAF'},
+    {name:'Norway',flag:'🇳🇴',conf:'UEFA'},
+    {name:'Iraq',flag:'🇮🇶',conf:'AFC'},
+  ],
+  J:[
+    {name:'Argentina',flag:'🇦🇷',conf:'CONMEBOL'},
+    {name:'Algeria',flag:'🇩🇿',conf:'CAF'},
+    {name:'Austria',flag:'🇦🇹',conf:'UEFA'},
+    {name:'Jordan',flag:'🇯🇴',conf:'AFC'},
+  ],
+  K:[
+    {name:'Portugal',flag:'🇵🇹',conf:'UEFA'},
+    {name:'Colombia',flag:'🇨🇴',conf:'CONMEBOL'},
+    {name:'Congo DR',flag:'🇨🇩',conf:'CAF'},
+    {name:'Uzbekistan',flag:'🇺🇿',conf:'AFC'},
+  ],
+  L:[
+    {name:'England',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',conf:'UEFA'},
+    {name:'Croatia',flag:'🇭🇷',conf:'UEFA'},
+    {name:'Ghana',flag:'🇬🇭',conf:'CAF'},
+    {name:'Panama',flag:'🇵🇦',conf:'CONCACAF'},
+  ],
+};
+
+const GROUP_OPENERS = {
+  A:'Jun 11 · Mexico City',B:'Jun 12 · Toronto',C:'Jun 13 · New York/NJ',
+  D:'Jun 12 · Los Angeles',E:'Jun 14 · Houston',F:'Jun 14 · Dallas',
+  G:'Jun 15 · Seattle',H:'Jun 15 · Atlanta',I:'Jun 16 · New York/NJ',
+  J:'Jun 16 · Kansas City',K:'Jun 17 · Houston',L:'Jun 17 · Dallas',
+};
+
+function buildGroups(){
+  const grid = document.getElementById('groupsGrid');
+  let html = '';
+  Object.entries(GROUP_TEAMS).forEach(([g, teams]) => {
+    const gc = GRP[g] || {color:'#888', bg:'rgba(128,128,128,0.1)'};
+    html += `<div class="group-card" style="--gc-color:${gc.color}">
+      <div class="gc-header">
+        <div class="gc-title"><div class="gc-dot"></div>GROUP ${g}</div>
+        <div class="gc-opener">${GROUP_OPENERS[g]||''}</div>
+      </div>
+      <div class="gc-teams">`;
+    teams.forEach(t => {
+      html += `<div class="gc-team">
+        <div class="gc-flag">${t.flag}</div>
+        <div class="gc-name">${t.name}</div>
+        ${t.host ? '<span class="gc-host">HOST</span>' : ''}
+        <div class="gc-conf">${t.conf}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+  grid.innerHTML = html;
+}
+
+
   const r = await fetch(`${BASE}${path}`,{headers:{'X-Auth-Token':API_KEY}});
   if(!r.ok) throw new Error(`${r.status} ${r.statusText}`);
   return r.json();
@@ -698,7 +942,28 @@ async function loadStandings(){
     const data=await apiFetch(`/competitions/${COMP}/standings?season=2026`);
     const groups=(data.standings||[]).filter(s=>s.type==='TOTAL');
     if(!groups.length){
-      grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:48px;color:var(--text3);font-family:'Barlow Condensed',sans-serif;font-size:16px">Standings will populate when the tournament begins June 11.</div>`;
+      // Pre-tournament: show static teams with 0s
+      let html='';
+      Object.entries(GROUP_TEAMS).forEach(([g,teams])=>{
+        const gc=GRP[g]||{color:'#888'};
+        html+=`<div class="standing-group" style="--grp-color:${gc.color}">
+          <div class="sg-header"><div class="sg-color"></div>GROUP ${g}</div>
+          <table>
+            <thead><tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr></thead>
+            <tbody>`;
+        teams.forEach((t,i)=>{
+          const pc=i<2?'q':i===2?'b':'x';
+          html+=`<tr><td><span class="pos ${pc}">${i+1}</span>${t.flag} ${t.name}</td>
+            <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="pts">0</td></tr>`;
+        });
+        html+=`</tbody></table>
+          <div class="adv-line">
+            <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(228,0,58,0.3);margin-right:3px"></span>Top 2 qualify</span>
+            <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(0,48,135,0.3);margin-right:3px"></span>Best 3rd may qualify</span>
+          </div>
+        </div>`;
+      });
+      grid.innerHTML=html;
       return;
     }
     let html='';
@@ -800,7 +1065,202 @@ function renderSch(){
   el.innerHTML=html;
 }
 
-// ── TABS ─────────────────────────────────────────────────────────────────────
+// ── KNOCKOUT BRACKET ─────────────────────────────────────────────────────────
+const KO_STRUCTURE = [
+  {
+    round:'Round of 32', short:'R32', colorVar:'#7a84a0',
+    dates:['Jul 4','Jul 5','Jul 6','Jul 7'],
+    matches:[
+      {slot:'1A vs 2B', date:'Jul 4'},{slot:'1C vs 2D', date:'Jul 4'},
+      {slot:'1E vs 2F', date:'Jul 5'},{slot:'1G vs 2H', date:'Jul 5'},
+      {slot:'1I vs 2J', date:'Jul 6'},{slot:'1K vs 2L', date:'Jul 6'},
+      {slot:'2A vs 1B', date:'Jul 7'},{slot:'2C vs 1D', date:'Jul 7'},
+      {slot:'2E vs 1F', date:'Jul 8'},{slot:'2G vs 1H', date:'Jul 8'},
+      {slot:'2I vs 1J', date:'Jul 9'},{slot:'2K vs 1L', date:'Jul 9'},
+      {slot:'Best 3rd #1 vs Best 3rd #2', date:'Jul 10'},{slot:'Best 3rd #3 vs Best 3rd #4', date:'Jul 10'},
+      {slot:'Best 3rd #5 vs Best 3rd #6', date:'Jul 11'},{slot:'Best 3rd #7 vs Best 3rd #8', date:'Jul 11'},
+    ]
+  },
+  {
+    round:'Round of 16', short:'R16', colorVar:'#E4003A',
+    dates:['Jul 12–15'],
+    matches:[
+      {slot:'W R32 M1 vs W R32 M2', date:'Jul 12'},{slot:'W R32 M3 vs W R32 M4', date:'Jul 12'},
+      {slot:'W R32 M5 vs W R32 M6', date:'Jul 13'},{slot:'W R32 M7 vs W R32 M8', date:'Jul 13'},
+      {slot:'W R32 M9 vs W R32 M10', date:'Jul 14'},{slot:'W R32 M11 vs W R32 M12', date:'Jul 14'},
+      {slot:'W R32 M13 vs W R32 M14', date:'Jul 15'},{slot:'W R32 M15 vs W R32 M16', date:'Jul 15'},
+    ]
+  },
+  {
+    round:'Quarter-Finals', short:'QF', colorVar:'#FF6B00',
+    dates:['Jul 18–19'],
+    matches:[
+      {slot:'W R16 M1 vs W R16 M2', date:'Jul 18'},{slot:'W R16 M3 vs W R16 M4', date:'Jul 18'},
+      {slot:'W R16 M5 vs W R16 M6', date:'Jul 19'},{slot:'W R16 M7 vs W R16 M8', date:'Jul 19'},
+    ]
+  },
+  {
+    round:'Semi-Finals', short:'SF', colorVar:'#F0D060',
+    dates:['Jul 22–23'],
+    matches:[
+      {slot:'W QF M1 vs W QF M2', date:'Jul 22'},{slot:'W QF M3 vs W QF M4', date:'Jul 23'},
+    ]
+  },
+  {
+    round:'Third Place', short:'3RD', colorVar:'#7a84a0',
+    dates:['Jul 25'],
+    matches:[{slot:'L SF M1 vs L SF M2', date:'Jul 25'}]
+  },
+  {
+    round:'Final', short:'FINAL', colorVar:'#C8A84B', isFinal:true,
+    dates:['Jul 19'],
+    matches:[{slot:'W SF M1 vs W SF M2', date:'Jul 19'}]
+  },
+];
+
+async function loadKnockout(){
+  const el = document.getElementById('knockoutBracket');
+  // Try to fetch live knockout matches from API
+  let liveMatches = [];
+  try {
+    const data = await apiFetch(`/competitions/${COMP}/matches?stage=LAST_32,LAST_16,QUARTER_FINALS,SEMI_FINALS,THIRD_PLACE,FINAL`);
+    liveMatches = data.matches || [];
+  } catch(e) {
+    // Silent fail — we'll show the static bracket
+  }
+
+  // If we have live data, show it
+  if(liveMatches.length > 0){
+    renderKnockoutLive(liveMatches, el);
+    return;
+  }
+
+  // Otherwise show the static bracket structure
+  renderKnockoutStatic(el);
+}
+
+function renderKnockoutLive(matches, el){
+  const byRound = {};
+  matches.forEach(m => {
+    const r = m.stage || 'UNKNOWN';
+    if(!byRound[r]) byRound[r] = [];
+    byRound[r].push(m);
+  });
+  const roundOrder = ['LAST_32','LAST_16','QUARTER_FINALS','SEMI_FINALS','THIRD_PLACE','FINAL'];
+  const roundLabels = {
+    LAST_32:'Round of 32',LAST_16:'Round of 16',QUARTER_FINALS:'Quarter-Finals',
+    SEMI_FINALS:'Semi-Finals',THIRD_PLACE:'3rd Place',FINAL:'Final'
+  };
+  const roundColors = {
+    LAST_32:'#7a84a0',LAST_16:'#E4003A',QUARTER_FINALS:'#FF6B00',
+    SEMI_FINALS:'#F0D060',THIRD_PLACE:'#7a84a0',FINAL:'#C8A84B'
+  };
+  let html = '';
+  roundOrder.forEach(r => {
+    if(!byRound[r]) return;
+    const isFinal = r === 'FINAL';
+    const gridCls = {LAST_32:'r32',LAST_16:'r16',QUARTER_FINALS:'qf',SEMI_FINALS:'sf',THIRD_PLACE:'third',FINAL:'final'}[r]||'r16';
+    html += `<div class="ko-stage-label">${roundLabels[r]||r}</div>
+    <div class="ko-grid ${gridCls}">`;
+    byRound[r].forEach(m => {
+      const isDone = m.status==='FINISHED';
+      const isLive = m.status==='IN_PLAY'||m.status==='PAUSED';
+      const hs = m.score?.fullTime?.home ?? m.score?.halfTime?.home;
+      const as = m.score?.fullTime?.away ?? m.score?.halfTime?.away;
+      const hW = isDone && hs > as, aW = isDone && as > hs;
+      const color = roundColors[r]||'#888';
+      const stLabel = isLive?(m.status==='PAUSED'?'HT':'LIVE'):isDone?'FT':fmtET(m.utcDate)+' ET';
+      html += `<div class="ko-match ${isFinal?'final-match':''}" style="--km-color:${color}">
+        <div class="km-header">
+          <span class="km-round">${roundLabels[r]||r}</span>
+          <span class="km-date">${fmtDate(m.utcDate)} · ${stLabel}</span>
+        </div>
+        <div class="km-teams">
+          <div class="km-team">
+            <span class="km-name known">${m.homeTeam?.shortName||m.homeTeam?.name||'TBD'}</span>
+            <span class="km-score ${hW?'winner':''}">${isDone||isLive?(hs??0):'–'}</span>
+          </div>
+          <div class="km-team">
+            <span class="km-name known">${m.awayTeam?.shortName||m.awayTeam?.name||'TBD'}</span>
+            <span class="km-score ${aW?'winner':''}">${isDone||isLive?(as??0):'–'}</span>
+          </div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  el.innerHTML = html;
+}
+
+function renderKnockoutStatic(el){
+  // Countdown to group stage end
+  const groupEnd = new Date('2026-06-28T00:00:00-04:00');
+  const now = new Date();
+  const diff = groupEnd - now;
+  let countdownStr = '';
+  if(diff > 0){
+    const days = Math.floor(diff / 86400000);
+    countdownStr = `<div class="ko-countdown">Group stage ends in ${days} day${days!==1?'s':''}</div>`;
+  }
+
+  let html = `<div class="ko-tbd-note">
+    <strong>Draw Your Bracket</strong>
+    Knockout slots are determined when the group stage concludes on June 27.<br>
+    Check back July 4 for the Round of 32 kickoff.
+    ${countdownStr}
+  </div>`;
+
+  KO_STRUCTURE.forEach(stage => {
+    if(stage.isFinal) return; // show final separately at bottom
+    const gridCls = {
+      'Round of 32':'r32','Round of 16':'r16',
+      'Quarter-Finals':'qf','Semi-Finals':'sf','Third Place':'third'
+    }[stage.round]||'r16';
+    html += `<div class="ko-stage-label">${stage.round} <span style="color:var(--text3);font-size:10px;font-family:'Barlow',sans-serif;font-weight:400;letter-spacing:0;margin-left:4px">${stage.dates.join(', ')}</span></div>
+    <div class="ko-grid ${gridCls}">`;
+    stage.matches.forEach(m => {
+      html += `<div class="ko-match" style="--km-color:${stage.colorVar}">
+        <div class="km-header">
+          <span class="km-round">${stage.short}</span>
+          <span class="km-date">${m.date}</span>
+        </div>
+        <div class="km-teams">
+          <div class="km-team">
+            <span class="km-name tbd">${m.slot.split(' vs ')[0]}</span>
+            <span class="km-score">–</span>
+          </div>
+          <div class="km-team">
+            <span class="km-name tbd">${m.slot.split(' vs ')[1]||'TBD'}</span>
+            <span class="km-score">–</span>
+          </div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+
+  // Final at the bottom, centered and special
+  const final = KO_STRUCTURE.find(s => s.isFinal);
+  if(final){
+    html += `<div class="ko-stage-label" style="margin-top:32px">The Final <span style="color:var(--text3);font-size:10px;font-family:'Barlow',sans-serif;font-weight:400;letter-spacing:0;margin-left:4px">July 19 · MetLife Stadium, NJ</span></div>
+    <div style="display:flex;justify-content:center">
+    <div class="ko-match final-match" style="width:100%;max-width:400px">
+      <div class="km-header">
+        <span class="km-round" style="color:var(--wc-gold)">🏆 FIFA World Cup Final</span>
+        <span class="km-date">Jul 19, 2026</span>
+      </div>
+      <div class="km-teams">
+        <div class="km-team"><span class="km-name tbd">Winner SF1</span><span class="km-score">–</span></div>
+        <div class="km-team"><span class="km-name tbd">Winner SF2</span><span class="km-score">–</span></div>
+      </div>
+    </div></div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+
+let knockoutLoaded = false;
 document.querySelectorAll('.tab-btn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const tab=btn.dataset.tab;
@@ -808,6 +1268,7 @@ document.querySelectorAll('.tab-btn').forEach(btn=>{
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(`panel-${tab}`).classList.add('active');
+    if(tab==='knockout' && !knockoutLoaded){ knockoutLoaded=true; loadKnockout(); }
   });
 });
 
@@ -815,7 +1276,7 @@ document.getElementById('refreshBtn').addEventListener('click',loadScores);
 document.getElementById('refreshStandings').addEventListener('click',loadStandings);
 
 // ── INIT ─────────────────────────────────────────────────────────────────────
-buildSchedule();loadScores();loadStandings();
+buildGroups();buildSchedule();loadScores();loadStandings();
 setInterval(()=>{
   if(parseInt(document.getElementById('liveCount').textContent)>0)loadScores();
 },60000);
